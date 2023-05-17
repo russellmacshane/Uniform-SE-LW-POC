@@ -25,6 +25,8 @@ const config: GatsbyConfig = {
     "gatsby-transformer-sharp",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-postcss",
+    "gatsby-plugin-gatsby-cloud",
+
     {
       resolve: "gatsby-plugin-manifest",
       options: {
