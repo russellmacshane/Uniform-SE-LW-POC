@@ -28,13 +28,7 @@ const config: GatsbyConfig = {
      {
     resolve: `gatsby-plugin-gatsby-cloud`,
     options: {
-      headers: {},
-      allPageHeaders: [],
       mergeSecurityHeaders: false,
-      mergeLinkHeaders: true,
-      mergeCachingHeaders: true,
-      transformHeaders: (headers, path) => headers
-      generateMatchPathRewrites: true,
     },
   },
     {
