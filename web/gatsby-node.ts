@@ -1,4 +1,5 @@
 import path from "path";
+import fs from 'fs';
 import { enhanceComposition } from "./src/lib/canvas";
 import { RootComponentInstance } from "@uniformdev/canvas/.";
 import { execSync } from "child_process";
@@ -36,7 +37,7 @@ exports.createPages = async function ({ actions, graphql }: any) {
       }
     }
   `);
-  
+
 
   const compositions = data.allCompositions.compositions.map((c: any) =>
     parseComposition(c.node)
@@ -49,11 +50,17 @@ exports.createPages = async function ({ actions, graphql }: any) {
   );
 
   data.allCompositions.compositions.forEach((c: any, index: number) => {
-    actions.createPage({
-      path: c.node.slug,
-      component: path.resolve(`./src/compositions/page.tsx`),
-      context: { composition: enhancedCompositions[index] },
-    });
+    const slug: string = c.node.slug;
+    const overridePath = path.resolve(`./src/pages${slug}.tsx`);
+    const doesExist = fs.existsSync(overridePath);
+
+    if (!doesExist) {
+      actions.createPage({
+        path: c.node.slug,
+        component: path.resolve(`./src/compositions/page.tsx`),
+        context: { composition: enhancedCompositions[index] },
+      });
+    }
   });
 };
 
