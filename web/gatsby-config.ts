@@ -25,8 +25,18 @@ const config: GatsbyConfig = {
     "gatsby-transformer-sharp",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-postcss",
-    "gatsby-plugin-gatsby-cloud",
-
+     {
+    resolve: `gatsby-plugin-gatsby-cloud`,
+    options: {
+      headers: {},
+      allPageHeaders: [],
+      mergeSecurityHeaders: false,
+      mergeLinkHeaders: true,
+      mergeCachingHeaders: true,
+      transformHeaders: (headers, path) => headers
+      generateMatchPathRewrites: true,
+    },
+  },
     {
       resolve: "gatsby-plugin-manifest",
       options: {
