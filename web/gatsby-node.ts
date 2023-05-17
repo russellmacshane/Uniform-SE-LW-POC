@@ -10,8 +10,8 @@ console.log('Installing uniform-source-plugin dependencies');
 execSync('npm install', { cwd: pluginDirectory });
 
 // Run uniform:download-manifest script
-// console.log('Downloading Uniform manifest');
-// execSync('npm run uniform:download-manifest');
+console.log('Downloading Uniform manifest');
+execSync('npm run uniform:download-manifest');
 
 exports.createPages = async function ({ actions, graphql }: any) {
   const { data } = await graphql(`
