@@ -49,6 +49,12 @@ const config: GatsbyConfig = {
       },
     },
   ],
+   developMiddleware: (app) => {
+    app.use((req, res, next) => {
+      res.setHeader('X-Frame-Options', 'ALLOWALL');
+      next();
+    });
+  },
 };
 
 export default config;
