@@ -1,11 +1,11 @@
 export default function API(req, res) {
-  const slug = req.query ? req.query["slug"] : "/";
+  const path = req.query ? req.query["path"] : "/";
   let redirectPath;
 
-  if (slug === '/') {
+  if (path === '/') {
     redirectPath = '/';
   } else {
-    redirectPath = `/${slug}/`;
+    redirectPath = `/${path}/`;
   }
   const redirectUrl = `${redirectPath}?is_incontext_editing_mode=true`;
   res.redirect(redirectUrl);
