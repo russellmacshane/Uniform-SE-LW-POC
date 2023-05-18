@@ -1,24 +1,22 @@
 import React from "react";
-import { UniformComposition, UniformCompositionProps, UniformSlot } from "@uniformdev/canvas-react";
+import { UniformComposition, UniformCompositionProps, UniformSlot, createUniformApiEnhancer } from "@uniformdev/canvas-react";
 import { UniformContext } from "@uniformdev/context-react";
 import { createUniformContext } from "../lib/uniformContext";
 import Container from "../components/Container";
-import { enhanceComposition } from "../lib/canvas";
 
 // IMPORTANT: importing all canvas registered components here
 import "../components/canvasComponents";
 
 const clientContext = createUniformContext();
 
+const enhance = createUniformApiEnhancer({
+  apiUrl: '/api/enhance',
+});
+
 export default function PageComposition(props: any) {
   const { pageContext } = props;
-  const contextualEditingEnhancer: UniformCompositionProps["contextualEditingEnhancer"] =
-    async ({ composition }) => {
-      await enhanceComposition(composition);
-      return composition;
-    };
 
-  const { composition } = pageContext || {};
+  const { composition: originalComposition } = pageContext || {};
   return (
     <UniformContext
       context={clientContext}
@@ -30,8 +28,8 @@ export default function PageComposition(props: any) {
     >
       <Container>
         <UniformComposition
-          data={composition}
-          contextualEditingEnhancer={contextualEditingEnhancer}
+          data={originalComposition}
+          contextualEditingEnhancer={enhance}
         >
           <UniformSlot name="content" />
         </UniformComposition>
