@@ -9,12 +9,17 @@ import {
 import { CANVAS_SANITY_PARAMETER_TYPES } from "@uniformdev/canvas-sanity";
 import { sanityEnhancer } from "./sanity";
 
-const client = new CanvasClient({
-  apiKey: process.env.GATSBY_UNIFORM_API_KEY,
-  projectId: process.env.GATSBY_UNIFORM_PROJECT_ID,
-});
+const getCanvasClient = () => {
+  const client = new CanvasClient({
+    apiKey: process.env.GATSBY_UNIFORM_API_KEY,
+    projectId: process.env.GATSBY_UNIFORM_PROJECT_ID,
+  });
+
+  return client;
+}
 
 export const getComposition = async (path: string, preview: boolean) => {
+  const client = getCanvasClient();
   const { composition } = await client.getCompositionBySlug({
     slug: !path ? "/" : path,
     state:
@@ -26,6 +31,7 @@ export const getComposition = async (path: string, preview: boolean) => {
 };
 
 export const getStaticComposition = async (slug: string) => {
+  const client = getCanvasClient();
   const { composition } = await client.getCompositionBySlug({ slug });
   return composition;
 };
