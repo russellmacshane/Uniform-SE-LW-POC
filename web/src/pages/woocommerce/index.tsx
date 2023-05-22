@@ -14,14 +14,14 @@ import {
 
 import { UniformContext } from "@uniformdev/context-react";
 
-import RussCta from "../components/RussCta";
-import RussHeader from "../components/RussHeader";
-import RussFooter from "../components/RussFooter";
+import RussCta from "../../components/RussCta";
+import RussHeader from "../../components/RussHeader";
+import RussFooter from "../../components/RussFooter";
 
-import "../components/canvasComponents";
+import "../../components/canvasComponents";
 
-import { createUniformContext } from "../lib/uniformContext";
-import { enhanceComposition, getStaticComposition } from "../lib/canvas";
+import { createUniformContext } from "../../lib/uniformContext";
+import { enhanceComposition, getStaticComposition } from "../../lib/canvas";
 
 export async function getServerData({
   query,
