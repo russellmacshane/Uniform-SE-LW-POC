@@ -52,18 +52,21 @@ exports.sourceNodes = async ({
     const { nodes } = await getProjectMapClient().getNodes({
       compositionId: c.composition._id,
     });
-    createNode({
-      ...c,
-      id: createNodeId(`Composition-${c.composition._id}`),
-      name: c.composition._name,
-      slug: nodes?.[0].path,
-      componentType: c.composition.type,
-      slots: JSON.stringify(c.composition.slots),
-      parameters: JSON.stringify(c.composition?.parameters),
-      internal: {
-        type: "Compositions",
-        contentDigest: createContentDigest(c),
-      },
-    });
+
+    if (nodes.length !== 0) {
+      createNode({
+        ...c,
+        id: createNodeId(`Composition-${c.composition._id}`),
+        name: c.composition._name,
+        slug: nodes?.[0].path,
+        componentType: c.composition.type,
+        slots: JSON.stringify(c.composition.slots),
+        parameters: JSON.stringify(c.composition?.parameters),
+        internal: {
+          type: "Compositions",
+          contentDigest: createContentDigest(c),
+        },
+      });
+    }
   }
 };
